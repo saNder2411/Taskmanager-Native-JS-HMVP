@@ -1,7 +1,7 @@
 # Личный проект «Менеджер задач» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Ольшанский](https://up.htmlacademy.ru/ecmascript/10/user/880751).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Рубец](https://up.htmlacademy.ru/ecmascript/10/user/41580).
 
 ---
 
