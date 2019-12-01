@@ -1,4 +1,4 @@
-const getRandomNumberFromPeriod = (min, max) => (min + Math.round(max * Math.random()));
+const getRandomNumberFromPeriod = (min, max) => (min + Math.floor(max * Math.random()));
 
 const getRandomArrayItem = (arr) => {
   const randomIndex = getRandomNumberFromPeriod(0, arr.length - 1);

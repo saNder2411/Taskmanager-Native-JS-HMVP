@@ -24,7 +24,7 @@ renderMarkup(siteMain, createBoardTemplate());
 const taskList = siteMain.querySelector(`.board__tasks`);
 const tasks = generateTasks(TASK_COUNT);
 
-renderMarkup(taskList, createTaskEditTemplate());
+renderMarkup(taskList, createTaskEditTemplate(tasks[0]));
 
 tasks.slice(1).forEach((task) => renderMarkup(taskList, createTaskTemplate(task)));
 
