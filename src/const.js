@@ -1,3 +1,6 @@
+const TASK_COUNT = 22;
+const SHOWING_TASKS_COUNT_ON_START = 8;
+const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
 const FILTER_NAME = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
 const DESCRIPTION_TASKS = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
@@ -14,4 +17,4 @@ const DEFAULT_REPEATING_DAYS = {
   'su': false,
 };
 
-export { COLORS, FILTER_NAME, TAGS, DESCRIPTION_TASKS, DAYS, MONTHS, DEFAULT_REPEATING_DAYS };
+export { TASK_COUNT, SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON, COLORS, FILTER_NAME, TAGS, DESCRIPTION_TASKS, DAYS, MONTHS, DEFAULT_REPEATING_DAYS };
