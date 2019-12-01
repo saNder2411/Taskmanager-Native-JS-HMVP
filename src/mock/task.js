@@ -22,11 +22,12 @@ const generateTask = () => {
     repeatingDays: (dueDate) ? DEFAULT_REPEATING_DAYS : generateRepeatingDays(),
     tags: new Set(generateTags(TAGS)),
     color: getRandomArrayItem(COLORS),
-    isFavorite: (Math.random() > 5),
-    isArchive: (Math.random() > 5),
+    isFavorite: (Math.random() > 0.5),
+    isArchive: (Math.random() > 0.5),
   };
 };
 
 const generateTasks = (amount) => new Array(amount).fill(``).map(generateTask);
 
 export { generateTask, generateTasks };
+
