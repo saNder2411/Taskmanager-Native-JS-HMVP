@@ -26,4 +26,4 @@ const setTimeFormat = (date) => {
   return `${hours}:${minutes} ${interval}`;
 };
 
-export { getRandomArrayItem, getRandomDate, setTimeFormat };
+export { getRandomNumberFromPeriod, getRandomArrayItem, getRandomDate, setTimeFormat };

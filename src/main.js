@@ -5,19 +5,20 @@ import { createTaskTemplate } from './components/task.js';
 import { createTaskEditTemplate } from './components/task-edit.js';
 import { createLoadMoreButtonTemplate } from './components/load-more-button.js';
 import { generateTasks } from './mock/task.js';
+import { generateFilters } from './mock/filter.js';
 
 const TASK_COUNT = 22;
 const siteMain = document.querySelector(`.main`);
 const headerMain = siteMain.querySelector(`.main__control`);
 
-const renderMarkup = (container, template, renderCount = 1, place = `beforeend`) => {
-  for (let i = 0; i < renderCount; i++) {
-    container.insertAdjacentHTML(place, template);
-  }
+const renderMarkup = (container, template, place = `beforeend`) => {
+  container.insertAdjacentHTML(place, template);
 };
 
 renderMarkup(headerMain, createMainMenuTemplate());
-renderMarkup(siteMain, createFilterTemplate());
+
+const filters = generateFilters();
+renderMarkup(siteMain, createFilterTemplate(filters));
 renderMarkup(siteMain, createBoardTemplate());
 
 const taskList = siteMain.querySelector(`.board__tasks`);
