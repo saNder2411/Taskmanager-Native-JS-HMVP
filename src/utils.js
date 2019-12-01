@@ -1,11 +1,5 @@
 const getRandomNumberFromPeriod = (min, max) => (min + Math.floor(max * Math.random()));
 
-const getRandomArrayItem = (arr) => {
-  const randomIndex = getRandomNumberFromPeriod(0, arr.length - 1);
-
-  return arr[randomIndex];
-};
-
 const getRandomDate = () => {
   const currentDate = new Date();
   const sign = Math.random() > 0.5 ? 1 : -1;
@@ -26,4 +20,4 @@ const setTimeFormat = (date) => {
   return `${hours}:${minutes} ${interval}`;
 };
 
-export { getRandomNumberFromPeriod, getRandomArrayItem, getRandomDate, setTimeFormat };
+export { getRandomNumberFromPeriod, getRandomDate, setTimeFormat };
