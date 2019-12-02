@@ -17,11 +17,11 @@ const generateTask = () => {
   const dueDate = Math.random() > 0.5 ? getRandomDate() : null;
 
   return {
-    description: DESCRIPTION_TASKS[getRandomNumberFromPeriod(0, DESCRIPTION_TASKS.length)],
+    description: DESCRIPTION_TASKS[getRandomNumberFromPeriod(DESCRIPTION_TASKS.length)],
     dueDate,
     repeatingDays: (dueDate) ? DEFAULT_REPEATING_DAYS : generateRepeatingDays(),
     tags: new Set(generateTags(TAGS)),
-    color: COLORS[getRandomNumberFromPeriod(0, COLORS.length)],
+    color: COLORS[getRandomNumberFromPeriod(COLORS.length)],
     isFavorite: (Math.random() > 0.5),
     isArchive: (Math.random() > 0.5),
   };

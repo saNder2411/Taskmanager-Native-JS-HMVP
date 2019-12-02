@@ -4,7 +4,7 @@ import { getRandomNumberFromPeriod } from '../utils.js';
 const generateFilters = () => {
   return FILTER_NAME.map((name) => ({
     title: name,
-    count: getRandomNumberFromPeriod(1, 10),
+    count: getRandomNumberFromPeriod(10, 1),
   }));
 };
 

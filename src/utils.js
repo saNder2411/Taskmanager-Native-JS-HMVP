@@ -1,9 +1,9 @@
-const getRandomNumberFromPeriod = (min, max) => (min + Math.floor(max * Math.random()));
+const getRandomNumberFromPeriod = (max, min = 0) => (min + Math.floor(max * Math.random()));
 
 const getRandomDate = () => {
   const currentDate = new Date();
   const sign = Math.random() > 0.5 ? 1 : -1;
-  const diffValue = sign * getRandomNumberFromPeriod(0, 7);
+  const diffValue = sign * getRandomNumberFromPeriod(7);
 
   currentDate.setDate(currentDate.getDate() + diffValue);
 
