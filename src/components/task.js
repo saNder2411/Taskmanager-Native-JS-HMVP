@@ -1,5 +1,5 @@
 import { MONTHS } from '../const.js';
-import { setTimeFormat } from '../utils.js';
+import Utils from '../utils.js';
 
 const createHashtagsMarkup = (hashtags) => {
   return hashtags
@@ -19,7 +19,7 @@ const createTaskTemplate = (task) => {
   const isExpired = (dueDate instanceof Date && dueDate < Date.now());
   const isDateShowing = !!dueDate;
   const date = isDateShowing ? `${dueDate.getDate()} ${MONTHS[dueDate.getMonth()]}` : ``;
-  const time = isDateShowing ? setTimeFormat(dueDate) : ``;
+  const time = isDateShowing ? Utils.setTimeFormat(dueDate) : ``;
 
   const hashtags = createHashtagsMarkup(Array.from(tags));
 
@@ -79,4 +79,25 @@ const createTaskTemplate = (task) => {
   );
 };
 
-export { createTaskTemplate };
+export default class Task {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createTaskTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = Utils.createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

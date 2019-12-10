@@ -1,23 +1,52 @@
-const getRandomNumberFromPeriod = (max, min = 0) => (min + Math.floor(max * Math.random()));
+export default class Utils {
+  static getRandomNumberFromPeriod(max, min = 0) {
+    return min + Math.floor(max * Math.random());
+  }
 
-const getRandomDate = () => {
-  const currentDate = new Date();
-  const sign = Math.random() > 0.5 ? 1 : -1;
-  const diffValue = sign * getRandomNumberFromPeriod(7);
+  static getRandomDate() {
+    const currentDate = new Date();
+    const sign = Math.random() > 0.5 ? 1 : -1;
+    const diffValue = sign * this.getRandomNumberFromPeriod(7);
 
-  currentDate.setDate(currentDate.getDate() + diffValue);
+    currentDate.setDate(currentDate.getDate() + diffValue);
 
-  return currentDate;
-};
+    return currentDate;
+  }
 
-const castTimeFormat = (value) => (value < 10) ? `0${value}` : `${value}`;
+  static castTimeFormat(value) {
+    return value < 10 ? `0${value}` : `${value}`;
+  }
 
-const setTimeFormat = (date) => {
-  const hours = castTimeFormat(date.getHours() % 12);
-  const minutes = castTimeFormat(date.getMinutes());
-  const interval = date.getHours() > 11 ? `pm` : `am`;
+  static setTimeFormat(date) {
+    const hours = this.castTimeFormat(date.getHours() % 12);
+    const minutes = this.castTimeFormat(date.getMinutes());
+    const interval = date.getHours() > 11 ? `pm` : `am`;
 
-  return `${hours}:${minutes} ${interval}`;
-};
+    return `${hours}:${minutes} ${interval}`;
+  }
 
-export { getRandomNumberFromPeriod, getRandomDate, setTimeFormat };
+  static createElement(template) {
+    const newElement = document.createElement(`div`);
+    newElement.innerHTML = template;
+
+    return newElement.firstChild;
+  }
+
+  static renderPosition() {
+    return {
+      AFTERBEGIN: `afterbrgin`,
+      BEFOREEND: `beforeend`
+    };
+  }
+
+  static renderMarkup(container, element, place = this.renderPosition().BEFOREEND) {
+    switch (place) {
+      case this.renderPosition().AFTERBEGIN:
+        container.prepend(element);
+        break;
+      case this.renderPosition().BEFOREEND:
+        container.append(element);
+        break;
+    }
+  }
+}

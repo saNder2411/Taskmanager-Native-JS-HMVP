@@ -1,3 +1,25 @@
+import Utils from '../utils.js';
+
 const createLoadMoreButtonTemplate = () => `<button class="load-more" type="button">load more</button>`;
 
-export { createLoadMoreButtonTemplate };
+export default class LoadMoreButton {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createLoadMoreButtonTemplate();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = Utils.createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
