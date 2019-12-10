@@ -1,4 +1,6 @@
-const createMainMenuTemplate = () => (
+import Utils from '../utils.js';
+
+const createSiteMenuTemplate = () => (
   `<section class="control__btn-wrap">
     <input
       type="radio"
@@ -27,4 +29,25 @@ const createMainMenuTemplate = () => (
   </section>`
 );
 
-export { createMainMenuTemplate };
+export default class SiteMenu {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createSiteMenuTemplate();
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = Utils.createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
+
