@@ -4,7 +4,7 @@ import FilterComponent from './components/filter.js';
 import BoardComponent from './components/board.js';
 import TaskComponent from './components/task.js';
 import TaskEditComponent from './components/task-edit.js';
-import LoadMoreButtonTemplateComponent from './components/load-more-button.js';
+import LoadMoreButtonComponent from './components/load-more-button.js';
 import { generateTasks } from './mock/task.js';
 import { generateFilters } from './mock/filter.js';
 import { TASK_COUNT, SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON, FILTER_NAMES } from './const.js';
@@ -42,7 +42,7 @@ const renderTask = (task) => {
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 tasks.slice(0, showingTasksCount).forEach((task) => renderTask(task));
 
-const loadMoreButtonComponent = new LoadMoreButtonTemplateComponent();
+const loadMoreButtonComponent = new LoadMoreButtonComponent();
 Utils.renderMarkup(boardComponent.getElement(), loadMoreButtonComponent.getElement());
 
 loadMoreButtonComponent.getElement().addEventListener(`click`, () => {
