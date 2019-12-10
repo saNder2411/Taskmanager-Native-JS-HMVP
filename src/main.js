@@ -28,12 +28,12 @@ const renderTask = (task) => {
 
   const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
   editButton.addEventListener(`click`, () => {
-    taskList.replaceWith(taskEditComponent.getElement(), taskComponent.getElement());
+    taskComponent.getElement().replaceWith(taskEditComponent.getElement());
   });
 
   const editForm = taskEditComponent.getElement().querySelector(`form`);
   editForm.addEventListener(`submit`, () => {
-    taskList.replaceWith(taskComponent.getElement(), taskEditComponent.getElement());
+    taskEditComponent.getElement().replaceWith(taskComponent.getElement());
   });
 
   Utils.renderMarkup(taskList, taskComponent.getElement());
