@@ -1,6 +1,6 @@
 export default class Utils {
   static getRandomNumberFromPeriod(max, min = 0) {
-    return min + Math.floor(max * Math.random());
+    return min + Math.floor((max - min) * Math.random());
   }
 
   static getRandomDate() {
