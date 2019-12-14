@@ -63,4 +63,12 @@ export default class Utils {
       oldElement.replaceWith(newElement);
     }
   }
+
+  static sortType() {
+    return {
+      DEFAULT: `default`,
+      DATE_UP: `date-up`,
+      DATE_DOWN: `date-down`,
+    };
+  }
 }

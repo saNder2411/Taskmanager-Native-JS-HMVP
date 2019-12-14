@@ -41,6 +41,12 @@ const renderTask = (container, task) => {
   Utils.renderMarkup(container, taskComponent);
 };
 
+const renderTasks = (taskList, tasks) => {
+  tasks.forEach((task) => {
+    renderTask(taskList, task);
+  });
+};
+
 
 export default class BoardController {
   constructor(container) {
@@ -66,19 +72,53 @@ export default class BoardController {
     const taskList = this._tasksComponent.getElement();
 
     let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
-    tasks.slice(0, showingTasksCount).forEach((task) => renderTask(taskList, task));
 
-    Utils.renderMarkup(container, this._loadMoreButtonComponent);
-
-    this._loadMoreButtonComponent.setClickHandler(() => {
-      const prevTaskCount = showingTasksCount;
-      showingTasksCount += SHOWING_TASKS_COUNT_BY_BUTTON;
-
-      tasks.slice(prevTaskCount, showingTasksCount).forEach((task) => renderTask(taskList, task));
-
+    const renderLoadMoreButton = () => {
       if (showingTasksCount >= tasks.length) {
+        return;
+      }
+
+      Utils.renderMarkup(container, this._loadMoreButtonComponent);
+
+      this._loadMoreButtonComponent.setClickHandler(() => {
+        const prevTaskCount = showingTasksCount;
+        showingTasksCount += SHOWING_TASKS_COUNT_BY_BUTTON;
+
+        renderTasks(taskList, tasks.slice(prevTaskCount, showingTasksCount));
+
+        if (showingTasksCount >= tasks.length) {
+          Utils.remove(this._loadMoreButtonComponent);
+        }
+      });
+    };
+
+    renderTasks(taskList, tasks.slice(0, showingTasksCount));
+    renderLoadMoreButton();
+
+    this._sortComponent.setSortTypeChangeHandler((sortType) => {
+      let sortedTasks = [];
+
+      switch (sortType) {
+        case Utils.sortType().DATE_UP:
+          sortedTasks = tasks.slice().sort((a, b) => a.dueDate - b.dueDate);
+          break;
+        case Utils.sortType().DATE_DOWN:
+          sortedTasks = tasks.slice().sort((a, b) => b.dueDate - a.dueDate);
+          break;
+        case Utils.sortType().DEFAULT:
+          sortedTasks = tasks.slice(0, showingTasksCount);
+          break;
+      }
+
+      taskList.innerHTML = ``;
+
+      renderTasks(taskList, sortedTasks);
+      if (sortType === Utils.sortType().DEFAULT) {
+        renderLoadMoreButton();
+      } else {
         Utils.remove(this._loadMoreButtonComponent);
       }
     });
+
   }
 }
