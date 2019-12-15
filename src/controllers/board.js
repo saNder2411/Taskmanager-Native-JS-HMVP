@@ -17,9 +17,7 @@ const renderTask = (container, task) => {
     document.removeEventListener(`keydown`, onEscKeyDown);
   };
 
-  const replaceTaskToEdit = () => {
-    Utils.replace(taskComponent, taskEditComponent);
-  };
+  const replaceTaskToEdit = () => Utils.replace(taskComponent, taskEditComponent);
 
   const onEscKeyDown = (evt) => {
     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
@@ -29,7 +27,6 @@ const renderTask = (container, task) => {
       document.removeEventListener(`keydown`, onEscKeyDown);
     }
   };
-
 
   taskComponent.setEditButtonClickHandler(() => {
     replaceTaskToEdit();
@@ -41,11 +38,7 @@ const renderTask = (container, task) => {
   Utils.renderMarkup(container, taskComponent);
 };
 
-const renderTasks = (taskList, tasks) => {
-  tasks.forEach((task) => {
-    renderTask(taskList, task);
-  });
-};
+const renderTasks = (taskList, tasks) => tasks.forEach((task) => renderTask(taskList, task));
 
 
 export default class BoardController {
@@ -113,6 +106,7 @@ export default class BoardController {
       taskList.innerHTML = ``;
 
       renderTasks(taskList, sortedTasks);
+
       if (sortType === Utils.sortType().DEFAULT) {
         renderLoadMoreButton();
       } else {
