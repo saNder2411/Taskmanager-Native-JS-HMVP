@@ -29,7 +29,7 @@ export default class Utils {
     const newElement = document.createElement(`div`);
     newElement.innerHTML = template;
 
-    return newElement.firstChild;
+    return newElement.firstElementChild;
   }
 
   static renderPosition() {
@@ -69,6 +69,13 @@ export default class Utils {
       DEFAULT: `default`,
       DATE_UP: `date-up`,
       DATE_DOWN: `date-down`,
+    };
+  }
+
+  static modeTask() {
+    return {
+      DEFAULT: `default`,
+      EDIT: `edit`,
     };
   }
 }
