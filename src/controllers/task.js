@@ -15,35 +15,6 @@ export default class TaskController {
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
   }
 
-  _replaceTaskToEdit() {
-    this._onViewChange();
-
-    Utils.replace(this._taskComponent, this._taskEditComponent);
-    this._mode = Utils.modeTask().EDIT;
-  }
-
-  _replaceEditToTask() {
-    this._taskEditComponent.reset();
-
-    Utils.replace(this._taskEditComponent, this._taskComponent);
-    this._mode = Utils.modeTask().DEFAULT;
-  }
-
-  _onEscKeyDown(evt) {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-
-    if (isEscKey) {
-      this._replaceEditToTask();
-      document.removeEventListener(`keydown`, this._onEscKeyDown);
-    }
-  }
-
-  setDefaultView() {
-    if (this._mode !== Utils.modeTask().DEFAULT) {
-      this._replaceEditToTask();
-    }
-  }
-
   render(task) {
     const oldTaskComponent = this._taskComponent;
     const oldTaskEditComponent = this._taskEditComponent;
@@ -68,13 +39,46 @@ export default class TaskController {
       }));
     });
 
-    this._taskEditComponent.setSubmitHandler(() => this._replaceEditToTask());
+    this._taskEditComponent.setSubmitHandler((evt) => {
+      evt.preventDefault();
+      this._replaceEditToTask();
+    });
 
     if (oldTaskComponent && oldTaskEditComponent) {
       Utils.replace(oldTaskComponent, this._taskComponent);
       Utils.replace(oldTaskEditComponent, this._taskEditComponent);
     } else {
       Utils.renderMarkup(this._container, this._taskComponent);
+    }
+  }
+
+  _onEscKeyDown(evt) {
+    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
+
+    if (isEscKey) {
+      this._replaceEditToTask();
+      document.removeEventListener(`keydown`, this._onEscKeyDown);
+    }
+  }
+
+  _replaceTaskToEdit() {
+    this._onViewChange();
+
+    Utils.replace(this._taskComponent, this._taskEditComponent);
+    this._mode = Utils.modeTask().EDIT;
+  }
+
+  _replaceEditToTask() {
+    this._taskEditComponent.reset();
+    this._mode = Utils.modeTask().DEFAULT;
+    document.removeEventListener(`keydown`, this._onEscKeyDown);
+
+    Utils.replace(this._taskEditComponent, this._taskComponent);
+  }
+
+  setDefaultView() {
+    if (this._mode !== Utils.modeTask().DEFAULT) {
+      this._replaceEditToTask();
     }
   }
 }
