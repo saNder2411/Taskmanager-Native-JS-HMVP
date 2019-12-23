@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default class Utils {
   static getRandomNumberFromPeriod(max, min = 0) {
     return min + Math.floor((max - min) * Math.random());
@@ -13,16 +15,12 @@ export default class Utils {
     return currentDate;
   }
 
-  static castTimeFormat(value) {
-    return value < 10 ? `0${value}` : `${value}`;
+  static formatDate(date) {
+    return moment(date).format(`DD MMMM`);
   }
 
-  static setTimeFormat(date) {
-    const hours = this.castTimeFormat(date.getHours() % 12);
-    const minutes = this.castTimeFormat(date.getMinutes());
-    const interval = date.getHours() > 11 ? `pm` : `am`;
-
-    return `${hours}:${minutes} ${interval}`;
+  static formatTime(date) {
+    return moment(date).format(`hh:mm A`);
   }
 
   static createElement(template) {
