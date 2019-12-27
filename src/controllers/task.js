@@ -1,6 +1,26 @@
 import TaskComponent from '../components/task.js';
 import TaskEditComponent from '../components/task-edit.js';
-import Utils from '../utils.js';
+import Render from '../utils/render.js';
+import { COLOR } from '../const.js';
+import { Mode } from '../const.js';
+
+export const EmptyTask = {
+  description: ``,
+  dueDate: null,
+  repeatingDays: {
+    'mo': false,
+    'tu': false,
+    'we': false,
+    'th': false,
+    'fr': false,
+    'sa': false,
+    'su': false,
+  },
+  tags: [],
+  color: COLOR.BLACK,
+  isFavorite: false,
+  isArchive: false,
+};
 
 
 export default class TaskController {
@@ -8,16 +28,19 @@ export default class TaskController {
     this._container = container;
     this._onDataChange = onDataChange;
     this._onViewChange = onViewChange;
-    this._mode = Utils.modeTask().DEFAULT;
+
+    this._mode = Mode.DEFAULT;
+
     this._taskComponent = null;
     this._taskEditComponent = null;
 
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
   }
 
-  render(task) {
+  render(task, mode) {
     const oldTaskComponent = this._taskComponent;
     const oldTaskEditComponent = this._taskEditComponent;
+    this._mode = mode;
 
     this._taskComponent = new TaskComponent(task);
     this._taskEditComponent = new TaskEditComponent(task);
@@ -41,44 +64,69 @@ export default class TaskController {
 
     this._taskEditComponent.setSubmitHandler((evt) => {
       evt.preventDefault();
-      this._replaceEditToTask();
+      const data = this._taskEditComponent.getData();
+      this._onDataChange(this, task, data);
     });
+    this._taskEditComponent.setDeleteButtonClickHandler(() => this._onDataChange(this, task, null));
 
-    if (oldTaskComponent && oldTaskEditComponent) {
-      Utils.replace(oldTaskComponent, this._taskComponent);
-      Utils.replace(oldTaskEditComponent, this._taskEditComponent);
-    } else {
-      Utils.renderMarkup(this._container, this._taskComponent);
+    switch (mode) {
+      case Mode.DEFAULT:
+        if (oldTaskComponent && oldTaskEditComponent) {
+          Render.replace(oldTaskComponent, this._taskComponent);
+          Render.replace(oldTaskEditComponent, this._taskEditComponent);
+          this._replaceEditToTask();
+        } else {
+          Render.renderMarkup(this._container, this._taskComponent);
+        }
+        break;
+      case Mode.ADDING:
+        if (oldTaskEditComponent && oldTaskComponent) {
+          Render.remove(oldTaskComponent);
+          Render.remove(oldTaskEditComponent);
+        }
+        document.addEventListener(`keydown`, this._onEscKeyDown);
+        Render.renderMarkup(this._container, this._taskEditComponent, Render.renderPosition().AFTERBEGIN);
+        break;
     }
+
+  }
+
+  setDefaultView() {
+    if (this._mode !== Mode.DEFAULT) {
+      this._replaceEditToTask();
+    }
+  }
+
+  destroy() {
+    Render.remove(this._taskComponent);
+    Render.remove(this._taskEditComponent);
+    document.removeEventListener(`keydown`, this._onEscKeyDown);
+  }
+
+  _replaceEditToTask() {
+    this._taskEditComponent.reset();
+    this._mode = Mode.DEFAULT;
+    document.removeEventListener(`keydown`, this._onEscKeyDown);
+
+    Render.replace(this._taskEditComponent, this._taskComponent);
+  }
+
+  _replaceTaskToEdit() {
+    this._onViewChange();
+
+    Render.replace(this._taskComponent, this._taskEditComponent);
+    this._mode = Mode.EDIT;
   }
 
   _onEscKeyDown(evt) {
     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
 
     if (isEscKey) {
-      this._replaceEditToTask();
-      document.removeEventListener(`keydown`, this._onEscKeyDown);
-    }
-  }
-
-  _replaceTaskToEdit() {
-    this._onViewChange();
-
-    Utils.replace(this._taskComponent, this._taskEditComponent);
-    this._mode = Utils.modeTask().EDIT;
-  }
-
-  _replaceEditToTask() {
-    this._taskEditComponent.reset();
-    this._mode = Utils.modeTask().DEFAULT;
-    document.removeEventListener(`keydown`, this._onEscKeyDown);
-
-    Utils.replace(this._taskEditComponent, this._taskComponent);
-  }
-
-  setDefaultView() {
-    if (this._mode !== Utils.modeTask().DEFAULT) {
+      if (this._mode === Mode.ADDING) {
+        this._onDataChange(this, EmptyTask, null);
+      }
       this._replaceEditToTask();
     }
   }
+
 }

@@ -1,9 +1,9 @@
-import Utils from '../utils.js';
+import Common from '../utils/common.js';
 
 const generateFilters = (filterNames) => {
   return filterNames.map((name) => ({
     title: name,
-    count: Utils.getRandomNumberFromPeriod(10, 1),
+    count: Common.getRandomNumberFromPeriod(10, 1),
   }));
 };
 
