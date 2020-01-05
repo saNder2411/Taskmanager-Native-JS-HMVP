@@ -1,8 +1,7 @@
 import TaskComponent from '../components/task.js';
 import TaskEditComponent from '../components/task-edit.js';
 import Render from '../utils/render.js';
-import { COLOR } from '../const.js';
-import { Mode } from '../const.js';
+import { Color, Mode } from '../const.js';
 
 export const EmptyTask = {
   description: ``,
@@ -17,7 +16,7 @@ export const EmptyTask = {
     'su': false,
   },
   tags: [],
-  color: COLOR.BLACK,
+  color: Color.BLACK,
   isFavorite: false,
   isArchive: false,
 };

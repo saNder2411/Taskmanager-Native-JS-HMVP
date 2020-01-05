@@ -2,14 +2,14 @@ import AbstractSmartComponent from './abstract-smart-component.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/light.css';
-import { COLORS, DAYS, MIN_DESCRIPTION_LENGTH, MAX_DESCRIPTION_LENGTH } from '../const.js';
+import { Colors, Days, DescriptionLength } from '../const.js';
 import Common from '../utils/common.js';
 import he from 'he';
 
 const isAllowableDescriptionLength = (description) => {
   const length = description.length;
 
-  return length >= MIN_DESCRIPTION_LENGTH && length <= MAX_DESCRIPTION_LENGTH;
+  return length >= DescriptionLength.MIN_LENGTH && length <= DescriptionLength.MAX_LENGTH;
 };
 
 const createColorsMarkup = (colors, currentColor) => {
@@ -94,8 +94,8 @@ const createTaskEditTemplate = (task, option = {}) => {
   const deadlineClass = isExpired ? `card--deadline` : ``;
 
   const tagsMarkup = createHashtags(tags);
-  const colorsMarkup = createColorsMarkup(COLORS, color);
-  const repeatingDaysMarkup = createRepeatingDaysMarkup(DAYS, activeRepeatingDays);
+  const colorsMarkup = createColorsMarkup(Colors, color);
+  const repeatingDaysMarkup = createRepeatingDaysMarkup(Days, activeRepeatingDays);
 
   return (
     `<article class="card card--edit card--${color} ${repeatClass} ${deadlineClass}">
@@ -188,7 +188,7 @@ const createTaskEditTemplate = (task, option = {}) => {
 };
 
 const parseFormData = (formData) => {
-  const repeatingDays = DAYS.reduce((acc, day) => {
+  const repeatingDays = Days.reduce((acc, day) => {
     acc[day] = false;
     return acc;
   }, {});
