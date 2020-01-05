@@ -30,6 +30,14 @@ const COLORS = [
   COLOR.PINK
 ];
 
+const ColorValue = {
+  [COLOR.BLACK]: `#000000`,
+  [COLOR.BLUE]: `#0c5cdd`,
+  [COLOR.GREEN]: `#31b55c`,
+  [COLOR.PINK]: `#ff3cb9`,
+  [COLOR.YELLOW]: `#ffe125`,
+};
+
 const SortType = {
   DEFAULT: `default`,
   DATE_UP: `date-up`,
@@ -51,12 +59,20 @@ const FilterType = {
   TAGS: `tags`,
   TODAY: `today`,
 };
+
+const MenuItem = {
+  NEW_TASK: `control__new-task`,
+  STATISTICS: `control__statistic`,
+  TASKS: `control__task`,
+};
+
 const MIN_DESCRIPTION_LENGTH = 1;
 const MAX_DESCRIPTION_LENGTH = 140;
+const HIDDEN_CLASS = `visually-hidden`;
 
 export {
   TASK_COUNT, SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON,
   TAGS, DESCRIPTION_TASKS, DAYS, DEFAULT_REPEATING_DAYS,
   COLORS, COLOR, SortType, Mode, FilterType, MIN_DESCRIPTION_LENGTH,
-  MAX_DESCRIPTION_LENGTH
+  MAX_DESCRIPTION_LENGTH, HIDDEN_CLASS, MenuItem, ColorValue
 };

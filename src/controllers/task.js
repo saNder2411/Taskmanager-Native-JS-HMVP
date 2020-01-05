@@ -67,6 +67,7 @@ export default class TaskController {
       const data = this._taskEditComponent.getData();
       this._onDataChange(this, task, data);
     });
+
     this._taskEditComponent.setDeleteButtonClickHandler(() => this._onDataChange(this, task, null));
 
     switch (mode) {
@@ -88,7 +89,6 @@ export default class TaskController {
         Render.renderMarkup(this._container, this._taskEditComponent, Render.renderPosition().AFTERBEGIN);
         break;
     }
-
   }
 
   setDefaultView() {
@@ -104,11 +104,14 @@ export default class TaskController {
   }
 
   _replaceEditToTask() {
-    this._taskEditComponent.reset();
-    this._mode = Mode.DEFAULT;
     document.removeEventListener(`keydown`, this._onEscKeyDown);
+    this._taskEditComponent.reset();
 
-    Render.replace(this._taskEditComponent, this._taskComponent);
+    if (document.contains(this._taskEditComponent.getElement())) {
+      Render.replace(this._taskEditComponent, this._taskComponent);
+    }
+
+    this._mode = Mode.DEFAULT;
   }
 
   _replaceTaskToEdit() {
