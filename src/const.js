@@ -1,10 +1,10 @@
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
-const DESCRIPTION_TASKS = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
-const TAGS = [`homework`, `theory`, `practice`, `intensive`, `keks`];
-const DAYS = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
-const DEFAULT_REPEATING_DAYS = {
+const DescriptionTasks = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
+const Tags = [`homework`, `theory`, `practice`, `intensive`, `keks`];
+const Days = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
+const DefaultRepeatingDays = {
   'mo': false,
   'tu': false,
   'we': false,
@@ -14,7 +14,7 @@ const DEFAULT_REPEATING_DAYS = {
   'su': false,
 };
 
-const COLOR = {
+const Color = {
   BLACK: `black`,
   YELLOW: `yellow`,
   BLUE: `blue`,
@@ -22,13 +22,21 @@ const COLOR = {
   PINK: `pink`,
 };
 
-const COLORS = [
-  COLOR.BLACK,
-  COLOR.YELLOW,
-  COLOR.BLUE,
-  COLOR.GREEN,
-  COLOR.PINK
+const Colors = [
+  Color.BLACK,
+  Color.YELLOW,
+  Color.BLUE,
+  Color.GREEN,
+  Color.PINK
 ];
+
+const ColorValue = {
+  [Color.BLACK]: `#000000`,
+  [Color.BLUE]: `#0c5cdd`,
+  [Color.GREEN]: `#31b55c`,
+  [Color.PINK]: `#ff3cb9`,
+  [Color.YELLOW]: `#ffe125`,
+};
 
 const SortType = {
   DEFAULT: `default`,
@@ -51,12 +59,23 @@ const FilterType = {
   TAGS: `tags`,
   TODAY: `today`,
 };
-const MIN_DESCRIPTION_LENGTH = 1;
-const MAX_DESCRIPTION_LENGTH = 140;
+
+const MenuItem = {
+  NEW_TASK: `control__new-task`,
+  STATISTICS: `control__statistic`,
+  TASKS: `control__task`,
+};
+
+const DescriptionLength = {
+  MIN_LENGTH: 1,
+  MAX_LENGTH: 140,
+};
+
+const HIDDEN_CLASS = `visually-hidden`;
 
 export {
   TASK_COUNT, SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON,
-  TAGS, DESCRIPTION_TASKS, DAYS, DEFAULT_REPEATING_DAYS,
-  COLORS, COLOR, SortType, Mode, FilterType, MIN_DESCRIPTION_LENGTH,
-  MAX_DESCRIPTION_LENGTH
+  Tags, DescriptionTasks, Days, DefaultRepeatingDays, Colors, Color,
+  SortType, Mode, FilterType, DescriptionLength, HIDDEN_CLASS, MenuItem,
+  ColorValue
 };

@@ -1,8 +1,8 @@
-import { COLORS, DESCRIPTION_TASKS, TAGS, DEFAULT_REPEATING_DAYS } from '../const.js';
+import { Colors, DescriptionTasks, Tags, DefaultRepeatingDays } from '../const.js';
 import Common from '../utils/common.js';
 
 const generateRepeatingDays = () => {
-  const repeatingDays = Object.assign({}, DEFAULT_REPEATING_DAYS);
+  const repeatingDays = Object.assign({}, DefaultRepeatingDays);
 
   for (const day of Object.keys(repeatingDays)) {
     repeatingDays[day] = (Math.random() > 0.75);
@@ -18,11 +18,11 @@ const generateTask = () => {
 
   return {
     id: null,
-    description: DESCRIPTION_TASKS[Common.getRandomNumberFromPeriod(DESCRIPTION_TASKS.length)],
+    description: DescriptionTasks[Common.getRandomNumberFromPeriod(DescriptionTasks.length)],
     dueDate,
-    repeatingDays: (dueDate) ? DEFAULT_REPEATING_DAYS : generateRepeatingDays(),
-    tags: new Set(generateTags(TAGS)),
-    color: COLORS[Common.getRandomNumberFromPeriod(COLORS.length)],
+    repeatingDays: (dueDate) ? DefaultRepeatingDays : generateRepeatingDays(),
+    tags: new Set(generateTags(Tags)),
+    color: Colors[Common.getRandomNumberFromPeriod(Colors.length)],
     isFavorite: (Math.random() > 0.5),
     isArchive: (Math.random() > 0.5),
   };
