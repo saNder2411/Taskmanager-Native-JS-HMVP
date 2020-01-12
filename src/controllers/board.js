@@ -18,9 +18,10 @@ const renderTasks = (taskList, tasks, onDataChange, onViewChange) => {
 
 
 export default class BoardController {
-  constructor(container, tasksModel) {
+  constructor(container, tasksModel, api) {
     this._container = container;
     this._tasksModel = tasksModel;
+    this._api = api;
 
     this._showedTaskControllers = [];
     this._showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
@@ -128,11 +129,15 @@ export default class BoardController {
       this._tasksModel.removeTask(oldData.id);
       this._updateTasks(this._showingTasksCount);
     } else {
-      const isSuccess = this._tasksModel.updateTask(oldData.id, newData);
+      this._api.updateTask(oldData.id, newData)
+        .then((tasksModel) => {
+          const isSuccess = this._tasksModel.updateTask(oldData.id, tasksModel);
 
-      if (isSuccess) {
-        taskController.render(newData, Mode.DEFAULT);
-      }
+          if (isSuccess) {
+            taskController.render(tasksModel, Mode.DEFAULT);
+            this._updateTasks(this._showingTasksCount);
+          }
+        });
     }
   }
 
