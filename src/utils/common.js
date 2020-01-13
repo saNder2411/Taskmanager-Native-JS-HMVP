@@ -4,20 +4,6 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { ColorValue } from '../const.js';
 
 export default class Common {
-  static getRandomNumberFromPeriod(max, min = 0) {
-    return min + Math.floor((max - min) * Math.random());
-  }
-
-  static getRandomDate() {
-    const currentDate = new Date();
-    const sign = Math.random() > 0.5 ? 1 : -1;
-    const diffValue = sign * this.getRandomNumberFromPeriod(7);
-
-    currentDate.setDate(currentDate.getDate() + diffValue);
-
-    return currentDate;
-  }
-
   static formatDate(date) {
     return moment(date).format(`DD MMMM`);
   }

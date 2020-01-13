@@ -1,18 +1,16 @@
-const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
-const DescriptionTasks = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
-const Tags = [`homework`, `theory`, `practice`, `intensive`, `keks`];
-const Days = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
-const DefaultRepeatingDays = {
-  'mo': false,
-  'tu': false,
-  'we': false,
-  'th': false,
-  'fr': false,
-  'sa': false,
-  'su': false,
-};
+const AUTHORIZATION = `Basic dXNlckBwYXNzd29yZAo=`;
+const END_POINT = `https://htmlacademy-es-10.appspot.com/task-manager`;
+const DAYS = [
+  `mo`,
+  `tu`,
+  `we`,
+  `th`,
+  `fr`,
+  `sa`,
+  `su`
+];
 
 const Color = {
   BLACK: `black`,
@@ -73,9 +71,21 @@ const DescriptionLength = {
 
 const HIDDEN_CLASS = `visually-hidden`;
 
+const Method = {
+  GET: `GET`,
+  POST: `POST`,
+  PUT: `PUT`,
+  DELETE: `DELETE`,
+};
+
+const ResponseStatusOkPeriod = {
+  MIN: 200,
+  MAX: 300,
+};
+
 export {
-  TASK_COUNT, SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON,
-  Tags, DescriptionTasks, Days, DefaultRepeatingDays, Colors, Color,
-  SortType, Mode, FilterType, DescriptionLength, HIDDEN_CLASS, MenuItem,
-  ColorValue
+  SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON,
+  DAYS, Colors, Color, SortType, Mode, FilterType, DescriptionLength,
+  HIDDEN_CLASS, MenuItem, ColorValue, Method, AUTHORIZATION, END_POINT,
+  ResponseStatusOkPeriod
 };
