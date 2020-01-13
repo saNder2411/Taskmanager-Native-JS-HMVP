@@ -78,8 +78,14 @@ const Method = {
   DELETE: `DELETE`,
 };
 
+const ResponseStatusOkPeriod = {
+  MIN: 200,
+  MAX: 300,
+};
+
 export {
   SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON,
   DAYS, Colors, Color, SortType, Mode, FilterType, DescriptionLength,
-  HIDDEN_CLASS, MenuItem, ColorValue, Method, AUTHORIZATION, END_POINT
+  HIDDEN_CLASS, MenuItem, ColorValue, Method, AUTHORIZATION, END_POINT,
+  ResponseStatusOkPeriod
 };

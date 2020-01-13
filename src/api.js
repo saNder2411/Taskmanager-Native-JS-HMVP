@@ -1,8 +1,8 @@
-import { Method } from './const.js';
+import { Method, ResponseStatusOkPeriod } from './const.js';
 import Task from './models/task.js';
 
 const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
+  if (response.status >= ResponseStatusOkPeriod.MIN && response.status < ResponseStatusOkPeriod.MAX) {
     return response;
   } else {
     throw new Error(`${response.status}: ${response.statusText}`);
