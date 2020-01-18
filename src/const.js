@@ -1,8 +1,11 @@
-const SHOWING_TASKS_COUNT_ON_START = 8;
-const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 const SHAKE_ANIMATION_TIMEOUT = 600;
 const AUTHORIZATION = `Basic dXNlckBwYXNzd29yZAo=`;
 const END_POINT = `https://htmlacademy-es-10.appspot.com/task-manager`;
+
+const ShowingTaskCount = {
+  ON_START: 8,
+  BY_BUTTON: 8,
+};
 
 const DAYS = [
   `mo`,
@@ -91,8 +94,8 @@ const DefaultData = {
 };
 
 export {
-  SHOWING_TASKS_COUNT_ON_START, SHOWING_TASKS_COUNT_BY_BUTTON,
-  DAYS, Colors, Color, SortType, Mode, FilterType, DescriptionLength,
-  HIDDEN_CLASS, MenuItem, ColorValue, Method, AUTHORIZATION, END_POINT,
-  ResponseStatusOkPeriod, DefaultData, SHAKE_ANIMATION_TIMEOUT
+  ShowingTaskCount, DAYS, Colors, Color, SortType, Mode, FilterType,
+  DescriptionLength, HIDDEN_CLASS, MenuItem, ColorValue, Method,
+  AUTHORIZATION, END_POINT, ResponseStatusOkPeriod, DefaultData,
+  SHAKE_ANIMATION_TIMEOUT
 };

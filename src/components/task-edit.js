@@ -136,7 +136,7 @@ const createTaskEditTemplate = (task, option = {}) => {
                       type="text"
                       placeholder=""
                       name="date"
-                      value="${date} ${time}"
+                      value="${date}${time}"
                     />
                   </label>
                 </fieldset>`
@@ -310,7 +310,7 @@ export default class TaskEdit extends AbstractSmartComponent {
   }
 
   getData() {
-    const form = this.getElement().querySelector(`.card__form`);
+    const form = this.getElement().querySelector(`form`);
 
     return new FormData(form);
   }
