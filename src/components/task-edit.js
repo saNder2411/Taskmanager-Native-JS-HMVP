@@ -2,7 +2,7 @@ import AbstractSmartComponent from './abstract-smart-component.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/light.css';
-import { Colors, DAYS, DescriptionLength } from '../const.js';
+import { Colors, DAYS, DescriptionLength, DefaultData } from '../const.js';
 import Common from '../utils/common.js';
 import he from 'he';
 
@@ -78,7 +78,7 @@ const createHashtags = (tags) => {
 
 const createTaskEditTemplate = (task, option = {}) => {
   const { tags, dueDate, color } = task;
-  const { isDateShowing, isRepeatingTask, activeRepeatingDays, currentDescription } = option;
+  const { isDateShowing, isRepeatingTask, activeRepeatingDays, currentDescription, externalData } = option;
 
   const description = he.encode(currentDescription);
 
@@ -96,6 +96,9 @@ const createTaskEditTemplate = (task, option = {}) => {
   const tagsMarkup = createHashtags(tags);
   const colorsMarkup = createColorsMarkup(Colors, color);
   const repeatingDaysMarkup = createRepeatingDaysMarkup(DAYS, activeRepeatingDays);
+
+  const deleteButtonText = externalData.DELETE_BUTTON_TEXT;
+  const saveButtonText = externalData.SAVE_BUTTON_TEXT;
 
   return (
     `<article class="card card--edit card--${color} ${repeatClass} ${deadlineClass}">
@@ -133,7 +136,7 @@ const createTaskEditTemplate = (task, option = {}) => {
                       type="text"
                       placeholder=""
                       name="date"
-                      value="${date} ${time}"
+                      value="${date}${time}"
                     />
                   </label>
                 </fieldset>`
@@ -178,8 +181,8 @@ const createTaskEditTemplate = (task, option = {}) => {
           </div>
 
           <div class="card__status-btns">
-            <button class="card__save" type="submit" ${isBlockSaveButton ? `disabled` : ``}>save</button>
-            <button class="card__delete" type="button">delete</button>
+            <button class="card__save" type="submit" ${isBlockSaveButton ? `disabled` : ``}>${saveButtonText}</button>
+            <button class="card__delete" type="button">${deleteButtonText}</button>
           </div>
         </div>
       </form>
@@ -197,6 +200,7 @@ export default class TaskEdit extends AbstractSmartComponent {
     this._isRepeatingTask = Object.values(task.repeatingDays).some(Boolean);
     this._activeRepeatingDays = Object.assign({}, task.repeatingDays);
     this._currentDescription = task.description;
+    this._externalData = DefaultData;
     this._submitHandler = null;
     this._flatpickr = null;
     this._deleteButtonClickHandler = null;
@@ -209,6 +213,7 @@ export default class TaskEdit extends AbstractSmartComponent {
     return createTaskEditTemplate(this._task, {
       isDateShowing: this._isDateShowing,
       isRepeatingTask: this._isRepeatingTask,
+      externalData: this._externalData,
       activeRepeatingDays: this._activeRepeatingDays,
       currentDescription: this._currentDescription,
     });
@@ -228,6 +233,11 @@ export default class TaskEdit extends AbstractSmartComponent {
       .addEventListener(`submit`, handler);
 
     this._submitHandler = handler;
+  }
+
+  setData(data) {
+    this._externalData = Object.assign({}, DefaultData, data);
+    this.reRender();
   }
 
   setDeleteButtonClickHandler(handler) {
@@ -300,7 +310,7 @@ export default class TaskEdit extends AbstractSmartComponent {
   }
 
   getData() {
-    const form = this.getElement().querySelector(`.card__form`);
+    const form = this.getElement().querySelector(`form`);
 
     return new FormData(form);
   }
