@@ -1,7 +1,6 @@
 import AbstractSmartComponent from './abstract-smart-component.js';
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
-import 'flatpickr/dist/themes/light.css';
+
 import { Colors, DAYS, DescriptionLength, DefaultData } from '../const.js';
 import Common from '../utils/common.js';
 import he from 'he';

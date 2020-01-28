@@ -1,5 +1,5 @@
-import { Method, ResponseStatusOkPeriod } from './const.js';
-import TaskModel from './models/task.js';
+import { Method, ResponseStatusOkPeriod } from '../const.js';
+import TaskModel from '../models/task.js';
 
 const checkStatus = (response) => {
   if (response.status >= ResponseStatusOkPeriod.MIN && response.status < ResponseStatusOkPeriod.MAX) {
@@ -45,6 +45,16 @@ export default class API {
 
   deleteTask(id) {
     return this._load({ url: `tasks/${id}`, method: Method.DELETE });
+  }
+
+  sync(data) {
+    return this._load({
+      url: `task/sync`,
+      method: Method.POST,
+      body: JSON.stringify(data),
+      headers: new Headers({ 'Content-Type': `application/json` }),
+    })
+      .then((response) => response.json());
   }
 
   _load({ url, method = Method.GET, body = null, headers = new Headers() }) {
