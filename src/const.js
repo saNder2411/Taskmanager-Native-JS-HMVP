@@ -1,6 +1,9 @@
 const SHAKE_ANIMATION_TIMEOUT = 600;
 const AUTHORIZATION = `Basic dXNlckBwYXNzd29yZAo=`;
 const END_POINT = `https://htmlacademy-es-10.appspot.com/task-manager`;
+const STORE_PREFIX = `taskmanager-localstorage`;
+const STORE_VER = `v1`;
+const STORE_NAME = `${STORE_PREFIX}-${STORE_VER}`;
 
 const ShowingTaskCount = {
   ON_START: 8,
@@ -97,5 +100,5 @@ export {
   ShowingTaskCount, DAYS, Colors, Color, SortType, Mode, FilterType,
   DescriptionLength, HIDDEN_CLASS, MenuItem, ColorValue, Method,
   AUTHORIZATION, END_POINT, ResponseStatusOkPeriod, DefaultData,
-  SHAKE_ANIMATION_TIMEOUT
+  SHAKE_ANIMATION_TIMEOUT, STORE_NAME
 };

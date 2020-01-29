@@ -1,8 +1,6 @@
 import AbstractSmartComponent from './abstract-smart-component.js';
 import Common from '../utils/common.js';
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
-import 'flatpickr/dist/themes/light.css';
 
 const createStatisticTemplate = ({ tasks, dateFrom, dateTo }) => {
   const placeholder = Common.createPlaceholder(dateFrom, dateTo);
@@ -80,7 +78,7 @@ export default class Statistics extends AbstractSmartComponent {
     this._renderCharts();
   }
 
-  recoveryListeners() {}
+  recoveryListeners() { }
 
   _renderCharts() {
     const element = this.getElement();
