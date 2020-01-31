@@ -1,6 +1,7 @@
 import AbstractComponent from './abstract-component.js';
 import Common from '../utils/common.js';
 import he from 'he';
+import { DEBOUNCE_TIMEOUT } from '../const.js';
 
 const createHashtagsMarkup = (hashtags) => {
   return hashtags
@@ -104,11 +105,11 @@ export default class Task extends AbstractComponent {
 
   setFavoritesButtonClickHandler(handler) {
     this.getElement().querySelector(`.card__btn--favorites`)
-      .addEventListener(`click`, handler);
+      .addEventListener(`click`, Common.debounce(handler, DEBOUNCE_TIMEOUT));
   }
 
   setArchiveButtonClickHandler(handler) {
     this.getElement().querySelector(`.card__btn--archive`)
-      .addEventListener(`click`, handler);
+      .addEventListener(`click`, Common.debounce(handler, DEBOUNCE_TIMEOUT));
   }
 }
