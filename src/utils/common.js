@@ -4,6 +4,21 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { ColorValue } from '../const.js';
 
 export default class Common {
+  static debounce(callback, ms) {
+    let lastTimeout = null;
+
+    return (...parameters) => {
+
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
+      }
+
+      lastTimeout = setTimeout(() => {
+        callback(...parameters);
+      }, ms);
+    };
+  }
+
   static formatDate(date) {
     return moment(date).format(`DD MMMM`);
   }
