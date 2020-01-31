@@ -49,10 +49,10 @@ export default class API {
 
   sync(data) {
     return this._load({
-      url: `task/sync`,
+      url: `tasks/sync`,
       method: Method.POST,
       body: JSON.stringify(data),
-      headers: new Headers({ 'Content-Type': `application/json` }),
+      headers: new Headers({ 'Content-Type': `application/json` })
     })
       .then((response) => response.json());
   }
@@ -60,7 +60,7 @@ export default class API {
   _load({ url, method = Method.GET, body = null, headers = new Headers() }) {
     headers.append(`Authorization`, this._authorization);
 
-    return fetch(`${this._endPoint}/${url}`, { method, headers, body })
+    return fetch(`${this._endPoint}/${url}`, { method, body, headers })
       .then(checkStatus)
       .catch((err) => {
         throw err;
